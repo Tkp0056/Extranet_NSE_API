@@ -105,7 +105,6 @@ def download_files(token):
                         download_folder(file_name,member,folder_path,folder_name)
 
         else:
-            # If the request is unsuccessful, print the status code and the error message
             print(f'Request failed with status code {response.status_code}: {response.text}')
             print("Problem in getting content",folder_path,folder_name)
         print("All Files of folder {0} of member {1} has been downloaded".format(folder_name,member))
@@ -120,7 +119,6 @@ def download_files(token):
         response = requests.get(download_url, headers=headers)
         if response.status_code == 200:
             data=response.content
-            #print(response)
             try:
                 folder_name=folder_path.split("/")[2]
                 new_path = os.path.join(new_path, folder_name)
@@ -135,7 +133,6 @@ def download_files(token):
                     f.write(data)
 
         else:
-            # If the request is unsuccessful, print the status code and the error message
             print(f'Request failed with status code {response.status_code}: {response.text}')
             print("Problem in downloading",folder_path,folder_name)
 
@@ -148,9 +145,7 @@ def download_files(token):
             headers = {'Authorization': 'Bearer ' + token}
             response = requests.get(content_url, headers=headers)
             if response.status_code == 200:
-                #print(response)
                 data=response.content
-                #print(data)
                 json_data=json.loads(data.decode('utf-8'))
                 for item in json_data['data']:
                     if item.get("type")=="Folder":
@@ -165,7 +160,6 @@ def download_files(token):
                         break
 
             else:
-                # If the request is unsuccessful, print the status code and the error message
                 print(f'Request failed with status code {response.status_code}: {response.text}')  
 
             print("All files downloaded of member {} number {}".format(member,count))           
@@ -178,5 +172,5 @@ while True:
         # Download files using the generated token
         download_files(token)
 
-    # Wait for 2 hours before generating the token again
+    # Wait for 1 hour before generating the token again
     time.sleep(3600)  
