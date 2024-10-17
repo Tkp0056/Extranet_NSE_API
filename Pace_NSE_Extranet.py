@@ -11,8 +11,8 @@ from cryptography.hazmat.backends import default_backend
 from django.utils.encoding import force_bytes, force_str
 import requests
 
-SECRET_KEY = "3MVtwzMgweao/nmQYnacZUqz5c80OxUKRO23BXP9m2A="
-value = force_bytes("Pacefin@8181")
+SECRET_KEY = "secret_key"
+value = force_bytes("password")
 backend = default_backend()
 key= force_bytes(base64.urlsafe_b64decode(SECRET_KEY))
 
@@ -43,9 +43,9 @@ def generate_token():
     crypto_text = force_str(base64.urlsafe_b64encode(crypto.encrypt()))
 
     payload = {
-    "memberCode":"90326",
-    "loginId":"PULKIT",
-    "password":"AiTsdxeCVtQIY9-0krrZXg=="
+    "memberCode":"member_id",
+    "loginId":"user_id",
+    "password":"encrypted_password"
     }
     headers = {"Content-Type": "application/json"}
 
